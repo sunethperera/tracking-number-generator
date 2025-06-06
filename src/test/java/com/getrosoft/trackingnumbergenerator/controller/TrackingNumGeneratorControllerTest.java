@@ -56,4 +56,23 @@ public class TrackingNumGeneratorControllerTest {
         MvcResult result = mockMvc.perform(request).andReturn();
         assertEquals(400, result.getResponse().getStatus());
     }
+
+    @Test
+    void getNextTrackingNumber_InvalidWeight_Test() throws Exception {
+        String url = "/next-tracking-number?" +
+                "origin_country_id=MY" +
+                "&destination_country_id=SL" +
+                "&weight=1.2345" +
+                "&created_at=2018-11-20T19:28:32+08:00" +
+                "&customer_id=de619854-b59b-425e-9db4-943979e1bd49" +
+                "&customer_name=RedBox Logistics" +
+                "&customer_slug=redbox-logistics";
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .get(url)
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(request).andReturn();
+        assertEquals(400, result.getResponse().getStatus());
+    }
 }

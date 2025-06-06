@@ -3,6 +3,7 @@ package com.getrosoft.trackingnumbergenerator.controller;
 import com.getrosoft.trackingnumbergenerator.dto.TrackingNumberDetailsDto;
 import com.getrosoft.trackingnumbergenerator.utils.TrackingNumberGenerator;
 import com.getrosoft.trackingnumbergenerator.utils.annotations.ISO31661Alpha2;
+import com.getrosoft.trackingnumbergenerator.utils.annotations.MaxDecimalPlaces;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,12 +27,10 @@ import java.util.Map;
 @Slf4j
 public class TrackingNumGeneratorController {
 
-    //Logger log = LoggerFactory.getLogger(TrackingNumGeneratorController.class);
-
     @GetMapping("/next-tracking-number")
     public ResponseEntity<TrackingNumberDetailsDto> getNextTrackingNumber(@RequestParam("origin_country_id") @Valid @ISO31661Alpha2 String originCountryId,
                                                                           @RequestParam("destination_country_id") @Valid @ISO31661Alpha2 String destinationCountryId,
-                                                                          @RequestParam("weight") Double weight,
+                                                                          @RequestParam("weight") @MaxDecimalPlaces(message = "Invalid value for weight. Maximum 3 decimal places are allowed for weight") Double weight,
                                                                           @RequestParam("created_at") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime createdDateTime,
                                                                           @RequestParam("customer_id") String customerId,
                                                                           @RequestParam("customer_name") String customerName,

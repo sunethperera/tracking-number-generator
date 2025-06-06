@@ -15,9 +15,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public final ErrorDetails handleConstraintViolationException(Exception ex, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
-        return errorDetails;
+    public final ErrorDetails handleConstraintViolationException(Exception ex, WebRequest request) {
+        return new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
     }
-
 }
