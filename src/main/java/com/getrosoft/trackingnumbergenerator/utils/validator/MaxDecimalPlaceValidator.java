@@ -20,6 +20,6 @@ public class MaxDecimalPlaceValidator implements ConstraintValidator<MaxDecimalP
         if (value == null) {
             return false;
         }
-        return BigDecimal.valueOf(value).scale() <= 3;
+        return BigDecimal.valueOf(value).scale() <= maxDecimalPlaces;
     }
 }
